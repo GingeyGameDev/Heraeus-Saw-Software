@@ -13,6 +13,6 @@ while True:
   elapsedTime = RFIDScan.finishTime(startTime)
 
   if(not firstScan == secondScan):
-    print RFIDScan.differentEmployee(elapsedTime,firstScan,secondScan)
+    print RFIDScan.employeeOverride(firstScan, secondScan, startTime)
   else:
     print RFIDScan.getTimeWorked(elapsedTime, firstScan)

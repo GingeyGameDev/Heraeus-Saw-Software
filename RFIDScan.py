@@ -33,3 +33,21 @@ def differentEmployee(elapsedTime, worker1, worker2):
   mins = mins % 60
   return "\n" + worker1 + " forgot to clock out and " + worker2 + " clocked in after {0}:{1}:{2}\n".format(int(hours),int(mins),sec) 
 
+# If a new employee swipes their card, it will stop the current employee's timer and begin one for the new employee.
+def employeeOverride(oldEmployee, newEmployee, startTime):
+  firstScan = oldEmployee
+  elapsedTime = time.time() - startTime
+  mins = elapsedTime // 60
+  sec = elapsedTime % 60
+  hours = mins // 60
+  mins = mins % 60
+  startTime = beginTime()
+  print "\n" + oldEmployee + " worked for " + str(int(hours)) + ":" + str(int(mins)) + ":" + str(sec) + " before " + newEmployee + " clocked in. " + newEmployee + " is now clocked in. Scan their card to end the timer.\n"
+  firstScan = newEmployee
+  secondScan = employeeNames[int(raw_input("\nScan again to stop\n"))]
+  elapsedTime = finishTime(startTime)
+
+  if(not firstScan == secondScan):
+    employeeOverride(firstScan, secondScan, startTime)
+  else:
+    return getTimeWorked(elapsedTime, firstScan)
