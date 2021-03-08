@@ -1,6 +1,5 @@
 #!/usr/bin/python
 import gspread
-import pandas as pd
 from oauth2client.service_account import ServiceAccountCredentials
 
 scope = ['https://spreadsheets.google.com/feeds','https://www.googleapis.com/auth/drive']
@@ -12,4 +11,3 @@ client = gspread.authorize(creds)
 sheet = client.open("Test Sheet")
 
 sheetInstance = sheet.get_worksheet(0)
-
