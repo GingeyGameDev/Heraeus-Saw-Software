@@ -11,3 +11,6 @@ client = gspread.authorize(creds)
 sheet = client.open("Test Sheet")
 
 sheetInstance = sheet.get_worksheet(0)
+
+def SheetUpdate(sheetName, value):
+    
