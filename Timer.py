@@ -1,5 +1,5 @@
 #!/usr/bin/python
-import time
+import time as time
 
 # starts timer and returns the system time at which the timer started
 def beginTime():
@@ -7,7 +7,7 @@ def beginTime():
 
 #takes the time started as a parameter and returns the amount of time elapsed since the timer started
 def finishTime(startTime):
-  endTime = time.time
+  endTime = time.time()
   elapsedTime = endTime - startTime
   return elapsedTime
 

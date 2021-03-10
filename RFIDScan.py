@@ -15,7 +15,7 @@ def employeeOverride(oldEmployee, newEmployee, startTime):
   elapsedTime = time.time() - startTime
   formattedTime = Timer.formatTime(elapsedTime)
   startTime = Timer.beginTime()
-  print "\n" + oldEmployee + " worked for " + formattedTime + " before " + newEmployee + " clocked in. " + newEmployee + " is now clocked in. Scan their card to end the timer.\n"
+  print ("\n" + oldEmployee + " worked for " + formattedTime + " before " + newEmployee + " clocked in. " + newEmployee + " is now clocked in. Scan their card to end the timer.\n")
   firstScan = newEmployee
   secondScan = employeeNames[int(raw_input("\nScan again to stop\n"))]
   elapsedTime = Timer.finishTime(startTime)
