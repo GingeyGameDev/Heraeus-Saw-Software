@@ -1,7 +1,7 @@
 #!/usr/bin/python
-import gpiozero
-import time
-import Timer
+import gpiozero as gpiozero
+import time as time
+import Timer as Timer
 
 #Makes a limit switch variable taking an input from the pin the button is on
 limitSwitch = gpiozero.Button(10)
@@ -13,7 +13,7 @@ while True:
     while not limitSwitch.is_held:
       time.sleep(.5)
     else:
-      print Timer.formatTime(Timer.finishTime(startTime))
+      print(Timer.formatTime(Timer.finishTime(startTime)))
   else:
     time.sleep(.5)
   time.sleep(.5)
