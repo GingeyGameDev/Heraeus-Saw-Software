@@ -8,9 +8,7 @@ creds = ServiceAccountCredentials.from_json_keyfile_name('quickstart-16147905772
 
 client = gspread.authorize(creds)
 
-sheet = client.open("Test Sheet")
-
-sheetInstance = sheet.get_worksheet(0)
-
-def SheetUpdate(sheetName, value):
-    
+def SheetUpdate(sheetName, values):
+    sheet = client.open(sheetName)
+    sheetInstance = sheet.get_worksheet(0)
+    sheetInstance.append_row(values)
