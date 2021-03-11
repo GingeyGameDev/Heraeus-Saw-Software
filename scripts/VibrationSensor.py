@@ -1,6 +1,7 @@
-import RFi.GPIO as GPIO
-from import MotionSensor
+import RPi.GPIO as GPIO
+import time as time
 
+#creates a motion sensor object and assignes it to the 17 pin
 channel = 17
 GPIO.setmode(GPIO.BCM)
 GPIO.setup(channel, GPIO.IN)
