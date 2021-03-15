@@ -1,5 +1,15 @@
-import RFi.GPIO as GPIO
-from import MotionSensor
+import time as time
+
+try:
+    import RPi.GPIO as GPIO
+except (RuntimeError, ModuleNotFoundError):
+    import sys
+    import fake_rpi
+
+    sys.modules['RPi'] = fake_rpi.RPi     # Fake RPi
+    sys.modules['RPi.GPIO'] = fake_rpi.RPi.GPIO # Fake GPIO
+    import RPi.GPIO as GPIO
+
 
 channel = 17
 GPIO.setmode(GPIO.BCM)
