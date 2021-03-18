@@ -13,6 +13,7 @@ setup()
 while True:
     while GPIO.input(P_BUTTON) == GPIO.LOW:
         print("Button is held down")
+        break
     else:
         print("Button has been let go")
     time.sleep(1)
