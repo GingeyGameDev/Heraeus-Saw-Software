@@ -1,5 +1,15 @@
-import RPi.GPIO as GPIO
 import time as time
+
+try:
+    import RPi.GPIO as GPIO
+except (RuntimeError, ModuleNotFoundError):
+    import sys
+    import fake_rpi
+
+    sys.modules['RPi'] = fake_rpi.RPi     # Fake RPi
+    sys.modules['RPi.GPIO'] = fake_rpi.RPi.GPIO # Fake GPIO
+    import RPi.GPIO as GPIO
+
 
 #creates a motion sensor object and assignes it to the 17 pin
 channel = 17
