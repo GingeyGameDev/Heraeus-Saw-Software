@@ -4,7 +4,7 @@
 #import Timer as Timer
 
 #Makes a limit switch variable taking an input from the pin the button is on
-limitSwitch = gpiozero.Button(11)
+#limitSwitch = gpiozero.Button(11)
 
 #tests every .5 seconds if the switch is being held down, and if it isn't, it will start a timer which will end once the button is pressed down again
 """while True:
