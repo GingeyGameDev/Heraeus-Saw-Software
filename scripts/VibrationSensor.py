@@ -1,4 +1,5 @@
-import time as time
+import time 
+import Timer
 
 #pattern for switching between RPis
 try:
@@ -50,11 +51,29 @@ def setup():
 
 setup()
 while True:
-    if GPIO.input(sensorPin) == GPIO.LOW:
+    if GPIO.input(sensorPin) == GPIO.low:
         time.sleep(3)
-        if GPIO.input(sensorPin) == GPIO.LOW:
+        if GPIO.input(sensorPin) == GPIO.low:
             print("Motion Detected!")
         break
     else:
         print("No motion is happening")
     time.sleep(1)
+
+#waits for vibration and returns the system time for a timer when detected. Timer is started 2 seconds late to ensure it does not start in the case of another source of vibration such as walking
+def waitForStart():
+    while True:
+        if GPIO.input(sensorPin) == GPIO.low:
+            time.sleep(2)
+            if GPIO.input(sensorPin) == GPIO.low:
+                return Timer.beginTime()
+        else:
+            time.sleep(.5)
+
+#waits for the vibration to stop and returns system time. 2 is added because the timer was started 2 seconds late
+def stopTime():
+    while True:
+        if GPIO.input(sensorPin) == GPIO.low:
+            time.sleep(.5)
+        else:
+            return (time.time() + 2)

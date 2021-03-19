@@ -1,5 +1,5 @@
 #!/usr/bin/python
-import time as time
+import time 
 
 # starts timer and returns the system time at which the timer started
 def beginTime():
