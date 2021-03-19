@@ -1,21 +1,37 @@
-#!/usr/bin/python
-import gpiozero as gpiozero
-import time as time
-import Timer as Timer
+import time
+import Timer
 
-#Makes a limit switch variable taking an input from the pin the button is on
-limitSwitch = gpiozero.Button(11)
 
-#tests every .5 seconds if the switch is being held down, and if it isn't, it will start a timer which will end once the button is pressed down again
+#pattern for switching between RPis
+try:
+    import sys
+    import RPi
+    sys.modules['RPi'] = RPi
+    sys.modules['RPi.GPIO'] = RPi.GPIO
+
+    import RPi.GPIO as GPIO
+    
+except (RuntimeError, ModuleNotFoundError):
+    import sys
+    import fake_rpi
+
+    sys.modules['RPi'] = fake_rpi.RPi     # Fake RPi
+    sys.modules['RPi.GPIO'] = fake_rpi.RPi.GPIO # Fake GPIO
+    import RPi.GPIO as GPIO
+
+# Button pin
+P_BUTTON = 7 # adapt to your wiring
+
+def setup():
+    GPIO.setmode(GPIO.BOARD)
+    GPIO.setup(P_BUTTON, GPIO.IN, GPIO.PUD_UP)
+
+setup()
 while True:
-  if not limitSwitch.is_held:
-    startTime = Timer.beginTime()
-    print("switch has been let go")
-    while not limitSwitch.is_held:
-      time.sleep(.5)
+    while GPIO.input(P_BUTTON) == GPIO.LOW:
+        print("Button is held down")
+        break
     else:
-      print("switch is being held")
-      print(Timer.formatTime(Timer.finishTime(startTime)))
-  else:
-    time.sleep(.5)
-  time.sleep(.5)
+        print("Button has been let go")
+    time.sleep(1)
+
