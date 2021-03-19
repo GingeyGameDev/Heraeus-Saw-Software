@@ -23,8 +23,8 @@ except (RuntimeError, ModuleNotFoundError):
 P_BUTTON = 7 # adapt to your wiring
 
 def setup():
-    GPIO.setmode(GPIO.BOARD)
-    GPIO.setup(P_BUTTON, GPIO.IN, GPIO.PUD_UP)
+   GPIO.setmode(GPIO.BOARD)
+   GPIO.setup(P_BUTTON, GPIO.IN, GPIO.PUD_UP)
 
 setup()
 while True:
