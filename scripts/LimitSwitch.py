@@ -6,9 +6,9 @@ import Timer
 try:
     import sys
     import RPi
+    import RPi.GPIO
     sys.modules['RPi'] = RPi
     sys.modules['RPi.GPIO'] = RPi.GPIO
-
     import RPi.GPIO as GPIO
     
 except (RuntimeError, ModuleNotFoundError):
