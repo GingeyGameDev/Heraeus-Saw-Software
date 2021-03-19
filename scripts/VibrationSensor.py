@@ -1,11 +1,12 @@
 import time as time
 
+#pattern for switching between RPis
 try:
     import sys
     import RPi
+    import RPi.GPIO
     sys.modules['RPi'] = RPi
     sys.modules['RPi.GPIO'] = RPi.GPIO
-
     import RPi.GPIO as GPIO
     
 except (RuntimeError, ModuleNotFoundError):
@@ -15,7 +16,7 @@ except (RuntimeError, ModuleNotFoundError):
     sys.modules['RPi'] = fake_rpi.RPi     # Fake RPi
     sys.modules['RPi.GPIO'] = fake_rpi.RPi.GPIO # Fake GPIO
     import RPi.GPIO as GPIO
-    print ("test")
+    
 #creates a motion sensor object and assignes it to the 17 pin
 channel = 17
 GPIO.setmode(GPIO.BCM)
