@@ -40,17 +40,20 @@ def empScanStop():
     print(formatTimeWithWorker(elapsedTime, firstScan))
     SheetsAPI.SheetUpdate("Test Sheet", [employeeNames[employeeNum], employeeNum, elapsedTime])
 
-#runs limit switch code - waits until it is released and starts time and adds it to total unpressed in that one shift. No stop method required because it starts and stops while the vibration sensor is running
-def limitSwitchTiming():
-  #code to start it here :)
-
 #runs vibration sensor code - waits for vibration and starts time and adds it to total sensed time in that one shift
 def startVibrationSensor():
+  vibStartTime = VibrationSensor.waitForStart()
   #put code to start vibration sensor here :)
+  
+#runs limit switch code - waits until it is released and starts time and adds it to total unpressed in that one shift. No stop method required because it starts and stops while the vibration sensor is running
+def limitSwitchTiming():
+  limitSwitchOpenTime = LimitSwitch.TimeDown()
+  totalLimitSwitchTime += limitSwitchOpenTime
 
 #runs code to stop vibration sensor and get time - unlike the limit switch, this is needed because it starts before limit switch is started and ends after
 def stopVibrationSensor():
-  #put code to stop vibration sensor here :)
+  vibStopTime = VibrationSensor.stopTime()
+  vibTotalTime += (vibStopTime - vibStartTime)
 
 #Starts all code on RFID scan
 while True:
