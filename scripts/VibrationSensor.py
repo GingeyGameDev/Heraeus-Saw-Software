@@ -16,7 +16,8 @@ except (RuntimeError, ModuleNotFoundError):
     sys.modules['RPi'] = fake_rpi.RPi     # Fake RPi
     sys.modules['RPi.GPIO'] = fake_rpi.RPi.GPIO # Fake GPIO
     import RPi.GPIO as GPIO
-    
+
+ """   
 #creates a motion sensor object and assignes it to the 17 pin
 channel = 17
 GPIO.setmode(GPIO.BCM)
@@ -35,3 +36,17 @@ GPIO.add_event_callback(channel, callback)
 
 while(True):
     time.sleep(1)
+    """
+
+
+
+
+#Code that we shall test in the future ---
+sensorPin = #check what pin # it is on NOT THE GPIO NUMBER!!!
+
+def setup():
+    GPIO.setmode(GPIO.BOARD)
+    GPIO.SETUP(sensorPin, GPIO.IN, GPIO.PUD_UP)
+
+setup
+while True:
