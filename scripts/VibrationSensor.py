@@ -48,6 +48,13 @@ def setup():
     GPIO.setmode(GPIO.BOARD)
     GPIO.SETUP(sensorPin, GPIO.IN, GPIO.PUD_UP)
 
-setup
+setup()
 while True:
-    
+    if GPIO.input(sensorPin) == GPIO.LOW:
+        time.sleep(3)
+        if GPIO.input(sensorPin) == GPIO.LOW:
+            print("Motion Detected!")
+        break
+    else:
+        print("No motion is happening")
+    time.sleep(1)
