@@ -52,5 +52,6 @@ def stopVibrationSensor():
   #put code to stop vibration sensor here :)
 
 #Starts all code on RFID scan
+
 while True:
-    
+  break
