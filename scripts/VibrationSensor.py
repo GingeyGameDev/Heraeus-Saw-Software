@@ -18,10 +18,10 @@ except (RuntimeError, ModuleNotFoundError):
     sys.modules['RPi.GPIO'] = fake_rpi.RPi.GPIO # Fake GPIO
     import RPi.GPIO as GPIO
 
- """   
+    
 #creates a motion sensor object and assignes it to the 17 pin
-channel = 17
-GPIO.setmode(GPIO.BCM)
+channel = 11
+GPIO.setmode(GPIO.BOARD)
 GPIO.setup(channel, GPIO.IN)
 
 #prints "movement detected" when run
@@ -37,30 +37,30 @@ GPIO.add_event_callback(channel, callback)
 
 while(True):
     time.sleep(1)
-    """
+    
 
 
 
 
 #Code that we shall test in the future ---
-sensorPin = #check what pin # it is on NOT THE GPIO NUMBER!!!
+sensorPin = 11 #check what pin # it is on NOT THE GPIO NUMBER!!!
 
 #sets up the board and the pin that the motion sensor is on
 def setup():
     GPIO.setmode(GPIO.BOARD)
     GPIO.SETUP(sensorPin, GPIO.IN, GPIO.PUD_UP)
- 
-#If input is detected, it waits 3 seconds checks again for an input, and if there is still an input, it prints out that motion was detected
-setup()
-while True:
-    if GPIO.input(sensorPin) == GPIO.low:
-        time.sleep(3)
+
+def test():
+    setup()
+    while True:
         if GPIO.input(sensorPin) == GPIO.low:
-            print("Motion Detected!")
-        break
-    else:
-        print("No motion is happening")
-    time.sleep(1)
+            #time.sleep(3)
+            if GPIO.input(sensorPin) == GPIO.low:
+                print("Motion Detected!")
+            break
+        else:
+            print("No motion is happening")
+        time.sleep(1)
 
 #waits for vibration and returns the system time for a timer when detected. Timer is started 2 seconds late to ensure it does not start in the case of another source of vibration such as walking
 def waitForStart():
