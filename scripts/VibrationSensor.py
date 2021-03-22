@@ -43,22 +43,23 @@ while(True):
 
 
 #Code that we shall test in the future ---
-sensorPin = #check what pin # it is on NOT THE GPIO NUMBER!!!
+sensorPin = 11#check what pin # it is on NOT THE GPIO NUMBER!!!
 
 def setup():
     GPIO.setmode(GPIO.BOARD)
     GPIO.SETUP(sensorPin, GPIO.IN, GPIO.PUD_UP)
 
-setup()
-while True:
-    if GPIO.input(sensorPin) == GPIO.low:
-        time.sleep(3)
+def vibration():
+    setup()
+    while True:
         if GPIO.input(sensorPin) == GPIO.low:
-            print("Motion Detected!")
-        break
-    else:
-        print("No motion is happening")
-    time.sleep(1)
+            time.sleep(3)
+            if GPIO.input(sensorPin) == GPIO.low:
+                print("Motion Detected!")
+            break
+        else:
+            print("No motion is happening")
+        time.sleep(1)
 
 #waits for vibration and returns the system time for a timer when detected. Timer is started 2 seconds late to ensure it does not start in the case of another source of vibration such as walking
 def waitForStart():
