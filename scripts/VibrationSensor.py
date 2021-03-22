@@ -49,7 +49,7 @@ def setup():
     GPIO.setmode(GPIO.BOARD)
     GPIO.SETUP(sensorPin, GPIO.IN, GPIO.PUD_UP)
 
-def vibration():
+def test():
     setup()
     while True:
         if GPIO.input(sensorPin) == GPIO.low:
