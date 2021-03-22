@@ -28,13 +28,13 @@ def setup():
    GPIO.setup(P_BUTTON, GPIO.IN, GPIO.PUD_UP)
 
 setup()
-"""while True:
+while True:
     while GPIO.input(P_BUTTON) == GPIO.LOW:
         print("Button is held down")
         break
     else:
         print("Button has been let go")
-    time.sleep(1)"""
+    time.sleep(1)
 
 #Starts a timer when the limit switch is not pressed in and ends it when the switch is pressed in. returns total time the switch was not pressed in(i.e. time the saw was down and cutting)
 def timeLogged():
