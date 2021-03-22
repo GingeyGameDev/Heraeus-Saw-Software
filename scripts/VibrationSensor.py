@@ -1,7 +1,7 @@
 import time 
 import Timer
 
-#pattern for switching between RPis
+#method for switching between RPis
 try:
     import sys
     import RPi
@@ -45,10 +45,12 @@ while(True):
 #Code that we shall test in the future ---
 sensorPin = #check what pin # it is on NOT THE GPIO NUMBER!!!
 
+#sets up the board and the pin that the motion sensor is on
 def setup():
     GPIO.setmode(GPIO.BOARD)
     GPIO.SETUP(sensorPin, GPIO.IN, GPIO.PUD_UP)
-
+ 
+#If input is detected, it waits 3 seconds checks again for an input, and if there is still an input, it prints out that motion was detected
 setup()
 while True:
     if GPIO.input(sensorPin) == GPIO.low:
