@@ -53,7 +53,7 @@ def vibration():
     setup()
     while True:
         if GPIO.input(sensorPin) == GPIO.low:
-            time.sleep(3)
+            #time.sleep(3)
             if GPIO.input(sensorPin) == GPIO.low:
                 print("Motion Detected!")
             break
