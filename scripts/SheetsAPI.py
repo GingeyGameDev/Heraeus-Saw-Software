@@ -1,13 +1,9 @@
 #!/usr/bin/python
 import gspread 
 from oauth2client.service_account import ServiceAccountCredentials
-<<<<<<< HEAD
 from xlutils.copy import copy
 import xlwt
 import xlrd as xlrd
-=======
-import xlwt 
->>>>>>> ea80ceb833ecf4a9fd1375dffa6c127ecdfcb9c8
 
 scope = ['https://spreadsheets.google.com/feeds','https://www.googleapis.com/auth/drive']
 
@@ -24,15 +20,26 @@ def SheetUpdate(sheetName, values):
 
 
 def libreUpdate(sheetName, values):
+
     rb =  xlrd.open_workbook("scripts/TestSheet.xls")
+    sheet = rb.sheet_by_index(0)
+
+    rowCount = sheet.nrows
+    for i in range(rowCount) :
+        emptyRow = 0
+        if(sheet.cell_value(i, 0) == ""):
+            emptyRow = i
+
+ 
 
     wb = copy(rb)
     sheet = wb.get_sheet(0)
 
-    sheet.write(1,1, "test")
+
+
+    sheet.write(emptyRow,0, "test")
     sheet.write(5, 5, 'TestSheet 2')
-    sheet.write_merge(3, 4, 3, 4, 'TestSheet 3'
+  
+    wb.save("scripts/TestSheet.xls")
 
-    wb.save('scripts/TestSheet.xls')
-
-libreUpdate('TestSheet', 1) 
+libreUpdate('test',1)
