@@ -20,8 +20,9 @@ except (RuntimeError, ModuleNotFoundError):
     import RPi.GPIO as GPIO
 
 # Button pin
-P_BUTTON = 7 # adapt to your wiring
+P_BUTTON = 7
 
+#sets up the board mode and the pin to take an input.
 def setup():
    GPIO.setmode(GPIO.BOARD)
    GPIO.setup(P_BUTTON, GPIO.IN, GPIO.PUD_UP)
@@ -35,3 +36,17 @@ while True:
         print("Button has been let go")
     time.sleep(1)
 
+#Starts a timer when the limit switch is not pressed in and ends it when the switch is pressed in. returns total time the switch was not pressed in(i.e. time the saw was down and cutting)
+def timeLogged():
+  noInput = True
+  while noInput:
+    if GPIO.input(P_BUTTON) == GPIO.low:
+      startTime = Timer.beginTime()
+      noInput = False
+    else:
+      time.sleep(.5)
+  while True:
+    if not GPIO.input(P_BUTTON) == GPIO.low:
+      return Timer.finishTime(startTime)
+    else:
+      time.sleep(.5)

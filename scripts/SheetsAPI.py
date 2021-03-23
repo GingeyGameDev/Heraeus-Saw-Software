@@ -1,9 +1,13 @@
 #!/usr/bin/python
-import gspread as gspread
+import gspread 
 from oauth2client.service_account import ServiceAccountCredentials
+<<<<<<< HEAD
 from xlutils.copy import copy
 import xlwt
 import xlrd as xlrd
+=======
+import xlwt 
+>>>>>>> ea80ceb833ecf4a9fd1375dffa6c127ecdfcb9c8
 
 scope = ['https://spreadsheets.google.com/feeds','https://www.googleapis.com/auth/drive']
 
