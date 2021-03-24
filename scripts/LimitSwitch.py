@@ -38,6 +38,7 @@ while True:
 
 #Starts a timer when the limit switch is not pressed in and ends it when the switch is pressed in. returns total time the switch was not pressed in(i.e. time the saw was down and cutting)
 def timeLogged():
+  setup()
   noInput = True
   while noInput:
     if GPIO.input(P_BUTTON) == GPIO.low:
@@ -50,3 +51,10 @@ def timeLogged():
       return Timer.finishTime(startTime)
     else:
       time.sleep(.5)
+
+def determineLimitSwitch():
+  scan = none
+  scan = input("Scan to stop")
+  if GPIO.input(P_BUTTON) == GPIO.low:
+    return True
+    
