@@ -54,6 +54,7 @@ def stopVibrationSensor():
   vibTotalTime += (vibStopTime - vibStartTime)
 
 #Starts all code on RFID scan
+
 while True:
     empScanStart()
     limitSwitchTiming()
