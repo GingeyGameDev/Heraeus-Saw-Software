@@ -12,7 +12,24 @@ client = gspread.authorize(creds)
 sheet = client.open("Test sheet")
 sheetInstance = sheet.get_worksheet(0)
 
+#wipes csv file
+wipe = open.('data.csv', 'w')
+wipe.write("")
+
+i = 0
 i = 0
 while i < 30:
     currentRow = sheetInstance.row_values(i) 
-    for 
+    csv = open('data.csv', 'a')
+    #writes each value into the csv file
+    for value in currentRow:
+        csv.write(str(currentRow[value - 1]))
+        #ensures a line break is placed at the end of each row
+        if value == (len(currentRow)):
+            csv.write("\n")
+            break
+        else:
+            csv.write(",")
+    i = i + 1
+
+
