@@ -12,15 +12,17 @@ def differentEmployee(elapsedTime, worker1, worker2):
 # If a new employee swipes their card, it will stop the current employee's timer and begin one for the new employee.
 def employeeOverride(oldEmployee, newEmployee, startTime):
   firstScan = oldEmployee
-  elapsedTime = time.time() - startTime
-  formattedTime = Timer.formatTime(elapsedTime)
+  timeAndWorker = [oldEmployee]
+  firstElapsedTime = Timer.finishTime(startTime)
+  timeAndWorker.append(firstElapsedTime)
   startTime = Timer.beginTime()
-  print ("\n" + oldEmployee + " worked for " + formattedTime + " before " + newEmployee + " clocked in. " + newEmployee + " is now clocked in. Scan their card to end the timer.\n")
   firstScan = newEmployee
-  secondScan = employeeNames[int(raw_input("\nScan again to stop\n"))]
+  secondScan = employeeNames[int(input("\nScan again to stop\n"))]
   elapsedTime = Timer.finishTime(startTime)
+  timeAndWorker.append(elapsedTime)
 
   if(not firstScan == secondScan):
     employeeOverride(firstScan, secondScan, startTime)
   else:
-    return(Timer.formatTimeWithWorker(elapsedTime, firstScan))
+    #ORDER: Name of first employee that clocked in, Elapsed time of first employees shift, Elapsed time of second employee's shift
+    return(timeAndWorker)
