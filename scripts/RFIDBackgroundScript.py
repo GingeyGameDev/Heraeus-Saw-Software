@@ -36,5 +36,5 @@ while True:
     if not firstScan == secondScan:
         timesAndWorker = RFIDScan.employeeOverride(firstScan, secondScan, startTime)
     else:
-        SheetsAPI.SheetUpdate()#put things for the update in here please matt :)
+        print(firstScan + " Worked for " + str(Timer.finishTime(startTime)))
         
