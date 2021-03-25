@@ -20,6 +20,7 @@ def employeeOverride(oldEmployee, newEmployee, startTime):
   secondScan = employeeNames[int(input("\nScan again to stop\n"))]
   elapsedTime = Timer.finishTime(startTime)
   timeAndWorker.append(elapsedTime)
+  timeAndWorker.append(secondScan)
 
   if(not firstScan == secondScan):
     employeeOverride(firstScan, secondScan, startTime)
