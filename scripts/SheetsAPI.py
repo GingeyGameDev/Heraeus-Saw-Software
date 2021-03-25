@@ -19,10 +19,6 @@ def SheetUpdate(sheetName, values):
     sheetInstance.append_row(values)
     libreUpdate(values)
 
-    
-
-
-
 def libreUpdate(values):
 
     date = datetime.date.today()
@@ -34,20 +30,11 @@ def libreUpdate(values):
 
     sheet = rb.sheet_by_index(0)
     emptyRow = sheet.nrows
+    
     wb = copy(rb)
     sheet = wb.get_sheet(0)
     
-
-
     
-    
-
- 
-
-   
-
-
-
     for ii in range(0, 10):
         for j in range(0,len(values)):
             sheet.write(emptyRow + ii, j, values[j])
