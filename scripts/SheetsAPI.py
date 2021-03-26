@@ -23,7 +23,7 @@ def libreUpdate(values):
 
     date = datetime.date.today()
     try:
-        rb =  xlrd.open_workbook("scripts/sheets/" + str(date.month) + str(date.year) +".xls")    
+        rb =  xlrd.open_workbook("/home/pi/Desktop/XLS Archive/" + str(date.month) + str(date.year) +".xls")    
     except(RuntimeError, FileNotFoundError):
         rb = xlrd.open_workbook("scripts/sheets/Template.xls")
         
@@ -39,6 +39,9 @@ def libreUpdate(values):
         for j in range(0,len(values)):
             sheet.write(emptyRow + ii, j, values[j])
   
-    wb.save(str(date.month) + str(date.year) +".xls")
+    try:
+        wb.save("/home/pi/Desktop/XLS Archive/" + str(date.month) + str(date.year) +".xls")
+    except(RuntimeError, FileNotFoundError):
+        wb.save("scripts/sheets/" + str(date.month) + str(date.year) + " - TEST" + ".xls")
 
 libreUpdate([1,2,3,4,5,6,7,8,9,10])
