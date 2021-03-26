@@ -19,6 +19,9 @@ def SheetUpdate(sheetName, values):
     sheetInstance.append_row(values)
     libreUpdate(values)
 
+def getName():
+    return sheetName
+
 def libreUpdate(values):
 
     date = datetime.date.today()

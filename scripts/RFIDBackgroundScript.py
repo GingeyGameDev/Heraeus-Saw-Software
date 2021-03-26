@@ -15,14 +15,14 @@ def find(key, arr):
       return True
   return False
 
-#
+#Infinite loop; waits for a first RFID scan and starts the timer when it is detected and stops the timer when the RFID card is scanned again. 
 while True:
     while True:
         employeeNum = int(input("Please scan card: \n"))
         if find(employeeNum, RFIDCodes):
             firstScan = employeeNames[employeeNum]
             startTime = Timer.beginTime()
-            prkint("\n" + firstScan + " is clocked in.\n")
+            print("\n" + firstScan + " is clocked in.\n")
             break
         else:
             print("\nName is not in the database. Please scan again.\n")

@@ -58,4 +58,4 @@ def determineLimitSwitch():
      return True
     elif False: #use the method to determine if something new is put in the sheet
       return False
-    time.sleep(.5)
+    time.sleep(1)
