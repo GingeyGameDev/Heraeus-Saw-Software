@@ -4,6 +4,8 @@ from oauth2client.service_account import ServiceAccountCredentials
 from xlutils.copy import copy
 import xlwt
 import xlrd as xlrd
+import datetime
+
 
 scope = ['https://spreadsheets.google.com/feeds','https://www.googleapis.com/auth/drive']
 
@@ -15,31 +17,31 @@ def SheetUpdate(sheetName, values):
     sheet = client.open(sheetName)
     sheetInstance = sheet.get_worksheet(0)
     sheetInstance.append_row(values)
-    libreUpdate(sheetName, values)
+    libreUpdate(values)
 
+def libreUpdate(values):
 
+    date = datetime.date.today()
+    try:
+        rb =  xlrd.open_workbook("/home/pi/Desktop/XLS Archive/" + str(date.month) + str(date.year) +".xls")    
+    except(RuntimeError, FileNotFoundError):
+        rb = xlrd.open_workbook("scripts/sheets/Template.xls")
+        
 
-def libreUpdate(sheetName, values):
-
-    rb =  xlrd.open_workbook("scripts/TestSheet.xls")
     sheet = rb.sheet_by_index(0)
-
-    rowCount = sheet.nrows
-    for i in range(rowCount) :
-        emptyRow = 0
-        if(sheet.cell_value(i, 0) == ""):
-            emptyRow = i
-
- 
-
+    emptyRow = sheet.nrows
+    
     wb = copy(rb)
     sheet = wb.get_sheet(0)
-
-
-
-    sheet.write(emptyRow,0, "test")
-    sheet.write(5, 5, 'TestSheet 2')
+    
+    
+    for ii in range(0, 10):
+        for j in range(0,len(values)):
+            sheet.write(emptyRow + ii, j, values[j])
   
-    wb.save("scripts/TestSheet.xls")
+    try:
+        wb.save("/home/pi/Desktop/XLS Archive/" + str(date.month) + str(date.year) +".xls")
+    except(RuntimeError, FileNotFoundError):
+        wb.save("scripts/sheets/" + str(date.month) + str(date.year) + " - TEST" + ".xls")
 
-libreUpdate('test',1)
+libreUpdate([1,2,3,4,5,6,7,8,9,10])
