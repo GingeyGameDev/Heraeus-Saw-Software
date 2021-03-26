@@ -18,6 +18,7 @@ def find(key, arr):
       return True
   return False
 
+"""
 #Starts the timer for RFID scan if the scanned card number is in the database
 def empScanStart():
   employeeNum = int(input("Scan\n"))
@@ -38,6 +39,7 @@ def empScanStop():
   else:
     print(formatTimeWithWorker(elapsedTime, firstScan))
     SheetsAPI.SheetUpdate("Test Sheet", [employeeNames[employeeNum], employeeNum, elapsedTime])
+"""
 
 #runs vibration sensor code - waits for vibration and starts time and adds it to total sensed time in that one shift
 def startVibrationSensor():
@@ -56,8 +58,6 @@ def stopVibrationSensor():
 #Starts all code on RFID scan
 
 while True:
-    empScanStart()
     limitSwitchTiming()
-    while determineLimitSwitch():
+    while LimitSwitch.determineLimitSwitch():
       limitSwitchTiming()
-    empScanStop()

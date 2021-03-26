@@ -23,7 +23,8 @@ def employeeOverride(oldEmployee, newEmployee, startTime):
   timeAndWorker.append(secondScan)
 
   if(not firstScan == secondScan):
+    print("\n" + timeAndWorker[0] + " worked for " + str(timeAndWorker[1]) + " before " + timeAndWorker[3] + " clocked in. They worked for " + str(timeAndWorker[2]) + "\n")
     employeeOverride(firstScan, secondScan, startTime)
   else:
-    #ORDER: Name of first employee that clocked in, Elapsed time of first employees shift, Elapsed time of second employee's shift
+    #ORDER: Name of first employee that clocked in, Elapsed time of first employees shift, Elapsed time of second employee's shift, name of second employee that clocked in.
     return(timeAndWorker)

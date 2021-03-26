@@ -15,12 +15,14 @@ def find(key, arr):
       return True
   return False
 
+#
 while True:
     while True:
         employeeNum = int(input("Please scan card: \n"))
         if find(employeeNum, RFIDCodes):
             firstScan = employeeNames[employeeNum]
             startTime = Timer.beginTime()
+            prkint("\n" + firstScan + " is clocked in.\n")
             break
         else:
             print("\nName is not in the database. Please scan again.\n")
@@ -35,6 +37,7 @@ while True:
 
     if not firstScan == secondScan:
         timesAndWorker = RFIDScan.employeeOverride(firstScan, secondScan, startTime)
+        print("\nElapsed time for " + timesAndWorker[0] + ": " + str(timesAndWorker[1]) + ". Time for " + timesAndWorker[3] + ": " + str(timesAndWorker[2]) + "\n")
     else:
         print(firstScan + " Worked for " + str(Timer.finishTime(startTime)))
         

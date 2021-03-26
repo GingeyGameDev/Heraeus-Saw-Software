@@ -53,8 +53,9 @@ def timeLogged():
       time.sleep(.5)
 
 def determineLimitSwitch():
-  scan = none
-  scan = input("Scan to stop")
-  if GPIO.input(P_BUTTON) == GPIO.low:
-    return True
-    
+  while True:
+    if GPIO.input(P_BUTTON) == GPIO.low:
+     return True
+    elif False: #use the method to determine if something new is put in the sheet
+      return False
+    time.sleep(.5)
