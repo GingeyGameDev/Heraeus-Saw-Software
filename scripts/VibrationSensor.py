@@ -95,11 +95,9 @@ while True:
     val = 0
     val = input(vibr_pin)
     if(val==1):
-        GPIO.output(LED_Pin, GPIO.HIGH)
-        sleep(1)
-        GPIO.output(LED_Pin, GPIO.LOW)
-        sleep(1)
+     print("Motion detected")
     else:
-        GPIO.output(LED_Pin, GPIO.LOW)
+        print("no motion detected")
+    time.sleep(1)
 
 GPIO.cleanup()        
