@@ -1,4 +1,4 @@
-import time 
+"""import time 
 import Timer
 
 #method for switching between RPis
@@ -78,4 +78,28 @@ def stopTime():
         if GPIO.input(sensorPin) == GPIO.low:
             time.sleep(.5)
         else:
-            return (time.time() + 2)
+            return (time.time() + 2)"""
+
+import RPi.GPIO as GPIO
+from time import sleep
+
+GPIO.setmode(GPIO.BOARD)
+GPIO.setwarnings(False)
+
+vibr_pin = 11
+
+GPIO.setup(channel, GPIO.IN)
+GPIO.setup(channel, GPIO.OUT)
+
+while True:
+    val = 0
+    val = input(vibr_pin)
+    if(val==1):
+        GPIO.output(LED_Pin, GPIO.HIGH)
+        sleep(1)
+        GPIO.output(LED_Pin, GPIO.LOW)
+        sleep(1)
+    else:
+        GPIO.output(LED_Pin, GPIO.LOW)
+
+GPIO.cleanup()        

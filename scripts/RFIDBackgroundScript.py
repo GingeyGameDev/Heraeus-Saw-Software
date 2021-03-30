@@ -8,6 +8,8 @@ employeeNames = {3194967166 : "Emmanuel",1128644206 : "Sayeh",3201638574 : "Sama
 #List of RFID codes that won't throw errors
 RFIDCodes = [3194967166,1128644206,3201638574,3194936622,3193054270,1132207246,1132849950,52632090,1073433162,3186384958,3186356286,3185943598,3185992142,3186706382,3185911774,3187063006,3186258206,3186236478,3186648926,1225119082,1232589594,1225917706,1225048442,1225976746,1225314026,1225347642,1230014186,1225445258,1225124458,2103732382,3331579884,2102780110,2103861214,2102692382,2103924478,2103838382,2103224910,2103835326]
 
+running : boolean
+
 #Finds if there is a given key in a given array
 def find(key, arr):
   for i in arr:
@@ -15,10 +17,16 @@ def find(key, arr):
       return True
   return False
 
+def isRunning():
+    return running
+
+def setRunning(state):
+    running = state
+
 #Infinite loop; waits for a first RFID scan and starts the timer when it is detected and stops the timer when the RFID card is scanned again. 
 while True:
     while True:
-        employeeNum = int(input("Please scan card: \n"))
+        employeeNum = int(input("Scan card to begin timer: \n"))
         if find(employeeNum, RFIDCodes):
             firstScan = employeeNames[employeeNum]
             startTime = Timer.beginTime()
@@ -28,7 +36,7 @@ while True:
             print("\nName is not in the database. Please scan again.\n")
     
     while True:
-        employeeNum = int(input("\nPlease scan again to exit\n"))
+        employeeNum = int(input("\nScan again to exit\n"))
         if find(employeeNum, RFIDCodes):
             secondScan = employeeNames[employeeNum]
             break
@@ -37,7 +45,9 @@ while True:
 
     if not firstScan == secondScan:
         timesAndWorker = RFIDScan.employeeOverride(firstScan, secondScan, startTime)
+        running = False
         print("\nElapsed time for " + timesAndWorker[0] + ": " + str(timesAndWorker[1]) + ". Time for " + timesAndWorker[3] + ": " + str(timesAndWorker[2]) + "\n")
     else:
+        running = False
         print(firstScan + " Worked for " + str(Timer.finishTime(startTime)))
         
