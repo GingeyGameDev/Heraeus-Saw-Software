@@ -1,9 +1,8 @@
 #!/usr/bin/python
-#from RFIDScan import employeeOverride
 from Timer import formatTimeWithWorker, beginTime, finishTime
-#import SheetsAPI 
+import SheetsAPI 
 import LimitSwitch 
-#import VibrationSensor 
+import VibrationSensor 
 from RFIDBackgroundScript import isRunning
 
 #Employee Library
@@ -19,29 +18,6 @@ def find(key, arr):
       return True
   return False
 
-"""
-#Starts the timer for RFID scan if the scanned card number is in the database
-def empScanStart():
-  employeeNum = int(input("Scan\n"))
-  if(find(employeeNum, RFIDCodes)):
-    firstScan = employeeNames[employeeNum]
-    startTime = beginTime()
-  else:
-    print("Name is not in the database. Please scan again")
-
-#ends scan making sure the code scanned the second time is the same as the code scanned the first time
-def empScanStop():
-  secondScan = employeeNames[int(input("\nScan again to stop\n"))]
-  elapsedTime = finishTime(startTime)
-
-  if(not firstScan == secondScan):
-    print(employeeOverride(firstScan, secondScan, startTime))
-    SheetsAPI.SheetUpdate("Test Sheet", [employeeNames[employeeNum], employeeNum, elapsedTime, "Didn't sign out"])
-  else:
-    print(formatTimeWithWorker(elapsedTime, firstScan))
-    SheetsAPI.SheetUpdate("Test Sheet", [employeeNames[employeeNum], employeeNum, elapsedTime])
-"""
-
 #runs vibration sensor code - waits for vibration and starts time and adds it to total sensed time in that one shift
 def startVibrationSensor():
   vibStartTime = VibrationSensor.waitForStart()
@@ -53,10 +29,10 @@ def limitSwitchTiming():
 
 #runs code to stop vibration sensor and get time - unlike the limit switch, this is needed because it starts before limit switch is started and ends after
 def stopVibrationSensor():
-  vibStopTime = VibrationSensor.stopTime()
+  vibStopTime = VibrationSensor.stopTiming()
   vibTotalTime += (vibStopTime - vibStartTime)
 
 #Starts all code when an input is seen by the limit switch.
 while True:
   while isRunning():
-      limitSwitchTiming()
+      startVibrationSensor()
