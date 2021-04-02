@@ -18,21 +18,35 @@ def find(key, arr):
       return True
   return False
 
+#used to determine when the RFID card has been scanned the second time. Stops the loop when false
+class running:
+  on = True
+
+RFIDScannedIn = running()
+
+def setRunning(state):
+  RFIDScannedIn.on = state
+
 #runs vibration sensor code - waits for vibration and starts time and adds it to total sensed time in that one shift
 def startVibrationSensor():
-  vibStartTime = VibrationSensor.waitForStart()
+  return VibrationSensor.waitForStart()
   
 #runs limit switch code - waits until it is released and starts time and adds it to total unpressed in that one shift. No stop method required because it starts and stops while the vibration sensor is running
 def limitSwitchTiming():
-  limitSwitchTime = LimitSwitch.timeLogged()
+  return LimitSwitch.timeLogged()
   totalLimitSwitchTime += limitSwitchTime
 
 #runs code to stop vibration sensor and get time - unlike the limit switch, this is needed because it starts before limit switch is started and ends after
 def stopVibrationSensor():
   vibStopTime = VibrationSensor.stopTiming()
+  return vibStopTime
   vibTotalTime += (vibStopTime - vibStartTime)
 
 #Starts all code when an input is seen by the limit switch.
 while True:
-  while isRunning():
-      startVibrationSensor()
+  vibTotalTime = 0
+  totalLimitSwitchTime = 0
+  while RFIDScannedIn.on:
+      vibStartTime = startVibrationSensor()
+      limitSwitchElapsedTime = limitSwitchTiming()
+      vibStopTime = stopVibrationSensor()
