@@ -1,17 +1,11 @@
 #!/usr/bin/python
-import gspread 
-from oauth2client.service_account import ServiceAccountCredentials
 from xlutils.copy import copy
 import xlwt
 import xlrd as xlrd
 import datetime
 
 
-scope = ['https://spreadsheets.google.com/feeds','https://www.googleapis.com/auth/drive']
 
-creds = ServiceAccountCredentials.from_json_keyfile_name('scripts/quickstart-1614790577278-273c4a82a923.json', scope)
-
-client = gspread.authorize(creds)
 
 def SheetUpdate(sheetName, values):
     sheet = client.open(sheetName)
@@ -79,11 +73,11 @@ def csvUpdate():
                     break
                 else:
                     csv.write(",")
-                    counter = counter + 1
-                    print(counter)
+                    counter =+ 1
             i = i + 1
     except IndexError:
         pass
+
 
 
 libreUpdate([1,2,3,4,5,6,7,8,9,10])
